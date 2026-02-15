@@ -1,0 +1,54 @@
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Polices LoadScreen LoftParis -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Fond toujours transparent — pas de fond noir NUI -->
+    <style>
+      html, body { background: transparent !important; background-color: transparent !important; }
+    </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <!-- Locales -->
+    <script src="locales/en.js"></script>
+  </head>
+  <body style="display: none">
+    <!-- Cadre décoratif style LoadScreen -->
+    <div class="multichar-borders"></div>
+
+    <!-- Bloc gauche : liste des personnages (style hud-block) -->
+    <div id="character-selector" class="multichar-block multichar-block-left">
+      <div id="_char_header" class="gold-accent">SÉLECTIONNER UN PERSONNAGE</div>
+      <div id="characters"></div>
+      <div id="_characters"></div>
+    </div>
+
+    <!-- Boutons Jouer / Supprimer (style btn-icon) -->
+    <div id="select-button">
+      <button id="select" class="multichar-btn multichar-btn-play" title="Jouer"><span class="material-symbols-outlined">play_arrow</span></button>
+      <button id="delete" class="multichar-btn multichar-btn-delete" title="Supprimer"><span class="material-symbols-outlined">delete</span></button>
+    </div>
+
+    <!-- Bloc droit : infos personnage (style hud-block) -->
+    <div class="main-container multichar-block multichar-block-right">
+      <div class="header">INFORMATIONS <span class="gold-accent">PERSONNAGE</span> <span class="material-symbols-outlined">person</span></div>
+      <div class="character-box" data-charid="1">
+        <h3 class="character-fullname"></h3>
+        <div class="character-info"></div>
+      </div>
+      <div class="footer">LoftParis RP</div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/app.js" type="text/javascript"></script>
+  </body>
+</html>
