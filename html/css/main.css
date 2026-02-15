@@ -70,8 +70,7 @@ p { margin: 0 !important; }
 .multichar-block {
   position: fixed;
   z-index: 9999;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* Important: le backdrop-filter provoque des rectangles noirs sur certains clients FiveM */
   padding: 20px 25px;
   border-radius: 12px;
   border: 1px solid var(--glass-border);
@@ -283,7 +282,7 @@ p { margin: 0 !important; }
   border-radius: 50%;
   color: var(--gold-primary);
   font-size: 22px;
-  backdrop-filter: blur(10px);
+  /* Évite l'artefact de fond noir sur les boutons en NUI */
   cursor: pointer;
   transition: all 0.3s ease;
 }
