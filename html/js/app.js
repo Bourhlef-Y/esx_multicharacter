@@ -1,13 +1,11 @@
-var money = Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-});
-
 // Masquer immédiatement au chargement (évite l’affichage au redémarrage ressource)
 (function () {
   if (document.body) document.body.style.display = "none";
-  else document.addEventListener("DOMContentLoaded", function () { document.body.style.display = "none"; });
+  else {
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.style.display = "none";
+    });
+  }
 })();
 
 (() => {
@@ -18,32 +16,22 @@ var money = Intl.NumberFormat("en-US", {
 
     $("[data-charid=1]")
       .html(
-        '<div class="character-info"><p id="character-info-name" class="character-info-name">' +
-           data.firstname +
-           " " +
-           data.lastname +
-          "<span>" +
-          '</span></p> <p id="character-info-dateofbirth" class="character-info-dateofbirth">' +
+        '<div class="character-info">' +
+          '<p id="character-info-name" class="character-info-name">' +
+          data.firstname +
+          " " +
+          data.lastname +
+          "</p>" +
+          '<p id="character-info-dateofbirth" class="character-info-dateofbirth">' +
           data.dateofbirth +
-          "<span>" +
-          '</span></p><p id="info-text" class="character-info-money">' +
-          money.format(data.money) +
-          "<span> " +
-          `<span class="material-symbols-outlined">
-          monetization_on
-          </span>` +
-          '</span></p><p id="info-text" class="character-info-bank">' +
-          money.format(data.bank) +
-          "<span> " +
-          `<span class="material-symbols-outlined">
-          account_balance
-          </span>` +
-          '</span></p> <p id="info-text" class="character-info-gender">' +
+          "</p>" +
+          '<p id="info-text" class="character-info-gender">' +
           data.sex +
-          "<span>" +
-          `<span class="material-symbols-outlined">
-          </span>` +
-          "</span></p></div>"
+          "</p>" +
+          '<p id="info-text" class="character-info-job">' +
+          (data.job || "") +
+          "</p>" +
+          "</div>"
       )
       .attr("data-ischar", "true");
   };
@@ -55,12 +43,11 @@ var money = Intl.NumberFormat("en-US", {
     );
   };
 
-  window.onload = function (e) {
+  window.onload = function () {
     document.body.style.display = "none";
     window.addEventListener("message", function (event) {
       switch (event.data.action) {
         case "openui":
-          console.log(event.data.character);
           Kashacter.ShowUI(event.data.character);
           break;
         case "closeui":
@@ -68,76 +55,67 @@ var money = Intl.NumberFormat("en-US", {
           break;
       }
 
-      let data = event.data
-      if (data.type == 'resetdata'){
-        console.log('aaaaaaaaaa')
-        $('#option').remove();
-        $('#option').remove();
-        $('#option').remove();
-        $('#option').remove();
-        $('#option').remove();
+      let data = event.data;
+      if (data.type == "resetdata") {
+        $("#option").remove();
+        $("#option").remove();
+        $("#option").remove();
+        $("#option").remove();
+        $("#option").remove();
       }
-      if (data.type == 'createcharacters'){
+      if (data.type == "createcharacters") {
         let ui = `
         <button id="option" onclick="selectoption(${data.value})" >
             <p id="optionname"><span class="material-symbols-outlined">person</span>${data.label}</p>
             <p id="playerjob">${data.job}</p>
-        </button>`
-        document.getElementById('characters').insertAdjacentHTML("beforeend", ui)
-        ui = null
+        </button>`;
+        document.getElementById("characters").insertAdjacentHTML("beforeend", ui);
+        ui = null;
       }
-      if (data.type == '_createcharacters'){
+      if (data.type == "_createcharacters") {
         let ui = `
         <button id="option" onclick="selectoption(${data.value})" >
             <p id="optionname"><span class="material-symbols-outlined">person</span>${data.label}</p>
-        </button>`
-        document.getElementById('_characters').insertAdjacentHTML("beforeend", ui)
-       // $('#_char_header').animate({'left':'2rem'},100)
-       // $('#characters').animate({'left':'10%'},100)
-       // $('#_characters').animate({'left':'10%'},100)
-        ui = null
+        </button>`;
+        document.getElementById("_characters").insertAdjacentHTML("beforeend", ui);
+        ui = null;
       }
     });
   };
 })();
 
-
-function selectoption(value){
-
+function selectoption(value) {
   $.post(
     `https://${GetParentResourceName()}/previewcharacter`,
     JSON.stringify(value)
   );
 
-
   const element = document.getElementById("select");
   const element1 = document.getElementById("delete");
-   element.remove();
-   element1.remove();
-  let data = value
+
+  if (element) element.remove();
+  if (element1) element1.remove();
+
+  let data = value;
   let ui = `
-  <button id="select"  onclick="selectcharacter(${data})"   ><span class="material-symbols-outlined">play_arrow</span></button>
-  <button id="delete"  onclick="deletecharacter(${data})"   ><span class="material-symbols-outlined">delete</span></button>
-  `
-  document.getElementById('select-button').insertAdjacentHTML("beforeend", ui)
-  $('#select-button').fadeIn()
-  ui = null
+  <button id="select" class="multichar-btn multichar-btn-play" title="Jouer" onclick="selectcharacter(${data})"><span class="material-symbols-outlined">play_arrow</span></button>
+  <button id="delete" class="multichar-btn multichar-btn-delete" title="Supprimer" onclick="deletecharacter(${data})"><span class="material-symbols-outlined">delete</span></button>
+  `;
+  document.getElementById("select-button").insertAdjacentHTML("beforeend", ui);
+  $("#select-button").fadeIn();
+  ui = null;
 }
 
-
-function deletecharacter(value){
+function deletecharacter(value) {
   $.post(
     `https://${GetParentResourceName()}/deletecharacter`,
     JSON.stringify(value)
   );
-
 }
 
-
-function selectcharacter(value){
+function selectcharacter(value) {
   $.post(
     `https://${GetParentResourceName()}/selectcharacter`,
     JSON.stringify(value)
   );
-  
 }

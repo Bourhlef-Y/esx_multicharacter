@@ -87,11 +87,12 @@ p { margin: 0 !important; }
 
 /* Bloc gauche : liste personnages */
 .multichar-block-left {
-  top: 50px;
-  left: 50px;
-  width: 320px;
-  max-height: calc(100vh - 120px);
+  top: 60px;
+  left: 60px;
+  width: 360px;
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
+  padding: 24px;
 }
 
 #_char_header {
@@ -110,7 +111,7 @@ p { margin: 0 !important; }
   transform: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 /* Options personnage (boutons liste) */
@@ -118,24 +119,25 @@ p { margin: 0 !important; }
   margin-top: 0;
   display: flex;
   flex-direction: column;
+  gap: 3px;
   text-align: left;
   color: #fff;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--glass-border);
-  border-radius: 8px;
-  padding: 12px 14px;
+  border-radius: 10px;
+  padding: 14px 16px;
   width: 100%;
-  min-height: 50px;
+  min-height: 56px;
   outline: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   font-family: 'Inter', sans-serif;
 }
 
 #option:hover {
   border-color: var(--gold-primary);
-  background: rgba(212, 175, 55, 0.08);
-  padding-left: 18px;
+  background: rgba(212, 175, 55, 0.12);
+  transform: translateX(4px);
 }
 
 #option:focus {
@@ -162,9 +164,9 @@ p { margin: 0 !important; }
 
 #playerjob {
   position: relative;
-  top: 4px;
+  top: 0;
   left: 0;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: rgba(255, 255, 255, 0.65);
   font-family: 'Inter', sans-serif;
   text-transform: uppercase;
@@ -174,9 +176,10 @@ p { margin: 0 !important; }
 /* Bloc droit : infos personnage */
 .multichar-block-right {
   top: 50%;
-  right: 50px;
+  right: 60px;
   transform: translateY(-50%);
-  width: 280px;
+  width: 320px;
+  padding: 24px;
   animation: multicharSlideIn 0.4s ease;
 }
 
@@ -226,20 +229,25 @@ p { margin: 0 !important; }
 }
 
 #character-info-dateofbirth {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.6);
   font-family: 'Inter', sans-serif;
 }
 
 #info-text,
-.character-info-money,
-.character-info-bank,
-.character-info-gender {
+.character-info-gender,
+.character-info-job {
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  padding-top: 0.5rem;
+  font-size: 0.92rem;
   margin-right: 0;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.character-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .character-info .material-symbols-outlined {
@@ -261,30 +269,34 @@ p { margin: 0 !important; }
 /* Zone boutons Jouer / Supprimer (centre bas) */
 #select-button {
   position: fixed;
-  bottom: 50px;
+  bottom: 42px;
   left: 50%;
   transform: translateX(-50%);
   display: none;
   flex-direction: row;
-  gap: 16px;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: rgba(12, 12, 12, 0.28) !important;
   z-index: 10000;
 }
 
 /* Boutons style LoadScreen .btn-icon */
 .multichar-btn {
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(40, 34, 22, 0.8) 0%, rgba(26, 22, 15, 0.92) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  border-radius: 14px;
   color: var(--gold-primary);
   font-size: 22px;
   /* Évite l'artefact de fond noir sur les boutons en NUI */
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .multichar-btn .material-symbols-outlined {
@@ -297,8 +309,8 @@ p { margin: 0 !important; }
 .multichar-btn:hover {
   background: var(--gold-primary);
   color: #000;
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(212, 175, 55, 0.35);
 }
 
 .multichar-btn-delete:hover {
